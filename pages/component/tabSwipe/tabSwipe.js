@@ -1,3 +1,7 @@
+/**
+ * @author Jesse
+ * @date 2019.11.9
+ */
 const app = getApp()
 const SCREEN_WIDTH = app.globalData.systemInfo.screenWidth
 Component({

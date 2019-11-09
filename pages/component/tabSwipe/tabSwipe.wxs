@@ -1,3 +1,7 @@
+/**
+ * @author Jesse
+ * @date 2019.11.9
+ */
 var screenWidth = 0
 var beginTabIndex = 0
 var tabScrollPositionArr = []
