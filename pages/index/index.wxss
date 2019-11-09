@@ -1,0 +1,17 @@
+/**index.wxss**/
+Page{
+  height: 100%;
+}
+.tab-swipe{
+  width: 100%;
+  flex: 1;
+}
+.page{
+  width: inherit;
+  height: inherit;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #646d78;
+}

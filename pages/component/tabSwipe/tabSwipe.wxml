@@ -1,0 +1,20 @@
+<wxs module="ts" src="./tabSwipe.wxs"></wxs>
+<view style="display: flex; flex-direction: column; height: 100%;">
+    <!-- 内容切换 -->
+    <view class="tab-contain">
+        <view class="tab-header" style="{{headerStyle}}">
+            <view wx:for="{{slots}}" wx:key="{{index}}" data-tab="{{index}}" bind:tap="tabTap" style=" color: {{currentTabIndex === index ? selColor : color}};{{tabStyle}}">
+                <text class="tab" style="{{currentTabIndex === index ? activeTabStyle : ''}}">{{item.title}}</text>
+            </view>
+        </view>
+        <view class="scroll-bar" style="width: {{tabScrollWidthArr[currentTabIndex]}}" change:prop="{{ts.init}}" prop="{{tabScrollPositionArr}}" data-screen-width="{{screenWidth}}" data-current-tab-index="{{currentTabIndex}}" data-tab-scroll-position-arr="{{tabScrollPositionArr}}" data-tab-scroll-width-arr="{{tabScrollWidthArr}}" style="{{underlineStyle}}"></view>
+    </view>
+    <view class="line" style="background-color:{{lineColor}}" />
+    <swiper current="{{currentTabIndex}}" style="flex: 1;{{swiperStyle}}" duration="300" bindchange="tabChange" bindtransition="{{ts.tabSwipe}}" bindanimationfinish="{{ts.tabFinish}}">
+        <swiper-item wx:for="{{slots}}" wx:key="{{index}}">
+            <view class="scroll-view">
+                <slot name="{{item.sName}}" />
+            </view>
+        </swiper-item>
+    </swiper>
+</view>

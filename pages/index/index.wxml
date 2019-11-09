@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="container">
+  <tab-swipe class="tab-swipe"
+    slots="{{slots}}"
+    underlineStyle="position: absolute; bottom: 15rpx; height: 5rpx; background-color: #3dca5e; border-radius: 2rpx;" 
+    lineColor="#eeeeee" 
+    color="#538C92" 
+    selColor="#20b747" 
+    headerStyle="display: flex; flex-wrap: nowrap;" 
+    tabStyle="height: 90rpx; display: flex; justify-content: center; font-size: 28rpx; align-items: center; width: 50%;" 
+    swiperStyle="margin-top: 30rpx;">
+    <view class="page" slot="{{slots[0].sName}}">
+      <text>这里是第一页</text>
+    </view>
+    <view class="page" slot="{{slots[1].sName}}">
+      <text>这里是第二页</text>
+    </view>
+    <view class="page" slot="{{slots[2].sName}}">
+      <text>这里是第三页</text>    
+    </view>
+    </tab-swipe>
+</view>

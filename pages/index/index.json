@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tab-swipe": "../component/tabSwipe/tabSwipe"
+  },
+  "disableScroll": true
+}

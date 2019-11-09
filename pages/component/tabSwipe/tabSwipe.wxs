@@ -1,0 +1,60 @@
+var screenWidth = 0
+var beginTabIndex = 0
+var tabScrollPositionArr = []
+var tabScrollWidthArr = []
+var instance = {}
+
+function init(newValue, oldValue, ownerInstance, inst) {
+    instance = inst
+    var dataset = instance.getDataset()
+    var currentTabIndex = dataset.currentTabIndex
+    screenWidth = dataset.screenWidth
+    tabScrollPositionArr = dataset.tabScrollPositionArr
+    tabScrollWidthArr = dataset.tabScrollWidthArr
+    _translate(tabScrollPositionArr[currentTabIndex], tabScrollWidthArr[currentTabIndex])
+}
+
+function tabSwipe(e, ownerInstance) {
+    var dx = e.detail.dx
+    var dataset = instance.getDataset()
+    var currentTabIndex = dataset.currentTabIndex
+    // 划去右边
+    if (dx > 0) {
+        var tabStep = beginTabIndex == currentTabIndex ? beginTabIndex + 1 : currentTabIndex
+        if (tabStep <= tabScrollPositionArr.length - 1) {
+            var x = tabScrollPositionArr[beginTabIndex] + (dx / (screenWidth * ((currentTabIndex - beginTabIndex) || 1))) * (tabScrollPositionArr[tabStep] - tabScrollPositionArr[beginTabIndex])
+            var w = tabScrollWidthArr[beginTabIndex] + (dx / (screenWidth * ((currentTabIndex - beginTabIndex) || 1))) * (tabScrollWidthArr[tabStep] - tabScrollWidthArr[beginTabIndex])
+            _translate(x, w)
+        }
+    }
+    // 划去左边
+    if (dx < 0) {
+        var tabStep = beginTabIndex == currentTabIndex ? beginTabIndex - 1 : currentTabIndex
+        if (tabStep >= 0) {
+            var x = tabScrollPositionArr[beginTabIndex] + (dx / (screenWidth * ((beginTabIndex - currentTabIndex) || 1))) * (tabScrollPositionArr[beginTabIndex] - tabScrollPositionArr[tabStep])
+            var w = tabScrollWidthArr[beginTabIndex] + (dx / (screenWidth * ((beginTabIndex - currentTabIndex) || 1))) * (tabScrollWidthArr[beginTabIndex] - tabScrollWidthArr[tabStep])
+            _translate(x, w)
+        }
+    }
+}
+
+function tabFinish(e, ownerInstance) {
+    var dataset = instance.getDataset()
+    var currentTabIndex = dataset.currentTabIndex
+    beginTabIndex = currentTabIndex
+    _translate(tabScrollPositionArr[currentTabIndex], tabScrollWidthArr[currentTabIndex])
+    ownerInstance.callMethod('tabFinish')
+}
+
+function _translate(x, w) {
+    instance.setStyle({
+        "transform": "translate3d(" + x + "px, 0, 0)",
+        "width": w + 'px'
+    })
+}
+
+module.exports = {
+    tabSwipe: tabSwipe,
+    tabFinish: tabFinish,
+    init: init
+}

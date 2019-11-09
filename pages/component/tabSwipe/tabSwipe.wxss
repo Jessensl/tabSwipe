@@ -1,0 +1,14 @@
+.tab-contain {
+  position: relative;
+  display: block;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #9dc4f5;
+}
+.scroll-view{
+  height: 100%; 
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
